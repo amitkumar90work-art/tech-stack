@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CodeNest – Software Development Company</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F4F6FA;--ink:#0E1B3D;--muted:#55607A;--blue:#2B5BFF;--line:#D7DCE8;--panel:#0E1B3D;--mint:#3DDC97;--white:#fff}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+h1,h2,h3{font-family:'Space Grotesk',system-ui,sans-serif;line-height:1.1}
+a{color:inherit}
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+
+header{border-bottom:1px solid var(--line);background:var(--bg);position:sticky;top:0;z-index:10}
+nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.25rem;text-decoration:none}
+.logo span{color:var(--blue)}
+nav ul{display:flex;gap:28px;list-style:none}
+nav ul a{text-decoration:none;color:var(--muted);font-weight:500}
+nav ul a:hover{color:var(--ink)}
+.btn{display:inline-block;background:var(--blue);color:var(--white);padding:13px 24px;border-radius:6px;text-decoration:none;font-weight:500;border:0;font-size:1rem;cursor:pointer;font-family:inherit}
+.btn:hover{background:#1B46D6}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:var(--white)}
+
+.hero{display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center;padding:80px 0}
+.hero h1{font-size:clamp(2.4rem,5vw,3.9rem);letter-spacing:-.02em;margin-bottom:20px}
+.hero p{color:var(--muted);font-size:1.15rem;max-width:30em;margin-bottom:32px}
+.hero .actions{display:flex;gap:12px;flex-wrap:wrap}
+
+.editor{background:var(--panel);border-radius:10px;box-shadow:0 20px 50px -20px rgba(14,27,61,.5);overflow:hidden}
+.editor .bar{display:flex;gap:7px;padding:12px 16px;background:#16275A}
+.editor .bar i{width:11px;height:11px;border-radius:50%;background:#3A4A7D}
+.editor .bar b{margin-left:auto;font:400 .78rem 'IBM Plex Mono',monospace;color:#8E9CC9}
+.editor pre{padding:20px;font:400 .88rem/1.7 'IBM Plex Mono',monospace;color:#DCE4FF;min-height:270px;overflow-x:auto;white-space:pre}
+.k{color:#8FB0FF}.s{color:var(--mint)}.c{color:#7280AE}
+.cursor{display:inline-block;width:8px;height:1em;background:var(--mint);vertical-align:-2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+section{padding:72px 0;border-top:1px solid var(--line)}
+section h2{font-size:clamp(1.8rem,3.4vw,2.5rem);margin-bottom:12px;letter-spacing:-.01em}
+.lead{color:var(--muted);max-width:36em;margin-bottom:40px}
+
+.services{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line);background:var(--white)}
+.service{padding:28px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.service:nth-child(3n){border-right:0}
+.service:nth-last-child(-n+3){border-bottom:0}
+.service h3{font-size:1.25rem;margin-bottom:8px}
+.service p{color:var(--muted);font-size:.97rem}
+
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;counter-reset:s;list-style:none}
+.steps li{counter-increment:s;border-top:3px solid var(--blue);padding-top:16px}
+.steps li::before{content:"Step " counter(s);font:400 .85rem 'IBM Plex Mono',monospace;color:var(--blue)}
+.steps h3{font-size:1.15rem;margin:4px 0 6px}
+.steps p{color:var(--muted);font-size:.95rem}
+
+.work{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.project{background:var(--white);border:1px solid var(--line);border-radius:8px;padding:24px}
+.project .tag{font:400 .8rem 'IBM Plex Mono',monospace;color:var(--blue)}
+.project h3{font-size:1.2rem;margin:8px 0}
+.project p{color:var(--muted);font-size:.95rem}
+
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+form{display:grid;gap:14px}
+label{font-weight:500;font-size:.92rem;display:grid;gap:6px}
+input,textarea{font:inherit;padding:12px;border:1.5px solid var(--line);border-radius:6px;background:var(--white);color:var(--ink)}
+textarea{min-height:120px;resize:vertical}
+#msg{color:#12805A;font-weight:500;min-height:1.5em}
+
+footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:.92rem}
+
+@media(max-width:860px){
+ .hero,.contact{grid-template-columns:1fr}
+ .hero{padding:48px 0}
+ .services,.work{grid-template-columns:1fr}
+ .service{border-right:0!important;border-bottom:1px solid var(--line)!important}
+ .service:last-child{border-bottom:0!important}
+ .steps{grid-template-columns:1fr 1fr}
+ nav ul{display:none}
+}
+@media(prefers-reduced-motion:reduce){.cursor{animation:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header>
+ <div class="wrap">
+  <nav aria-label="Main">
+   <a class="logo" href="#top">Code<span>Nest</span></a>
+   <ul>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#contact">Contact</a></li>
+   </ul>
+   <a class="btn" href="#contact">Get a quote</a>
+  </nav>
+ </div>
+</header>
+
+<main id="top">
+ <div class="wrap hero">
+  <div>
+   <h1>We build software that your business can rely on.</h1>
+   <p>Websites, mobile apps and custom software, designed, built and maintained by one small team that answers your calls.</p>
+   <div class="actions">
+    <a class="btn" href="#contact">Start your project</a>
+    <a class="btn ghost" href="#work">See our work</a>
+   </div>
+  </div>
+  <div class="editor" aria-hidden="true">
+   <div class="bar"><i></i><i></i><i></i><b>project.js</b></div>
+   <pre id="code"></pre>
+  </div>
+ </div>
+
+ <section id="services">
+  <div class="wrap">
+   <h2>What we build</h2>
+   <p class="lead">From a first idea to a live product, we cover the full stack.</p>
+   <div class="services">
+    <div class="service"><h3>Website development</h3><p>Fast, responsive business sites and online stores that rank well and convert visitors.</p></div>
+    <div class="service"><h3>Mobile apps</h3><p>Android and iOS apps built with Flutter or React Native from one codebase.</p></div>
+    <div class="service"><h3>Custom software</h3><p>Billing, inventory, CRM and internal tools built around how your team actually works.</p></div>
+    <div class="service"><h3>UI/UX design</h3><p>Clear interfaces tested with real users before a single line of code is written.</p></div>
+    <div class="service"><h3>Cloud and DevOps</h3><p>Secure hosting, automatic deployments and monitoring on AWS, Azure or Google Cloud.</p></div>
+    <div class="service"><h3>Maintenance and support</h3><p>Bug fixes, updates and new features after launch, with a monthly plan.</p></div>
+   </div>
+  </div>
+ </section>
+
+ <section id="process">
+  <div class="wrap">
+   <h2>How we work</h2>
+   <p class="lead">A simple process, so you always know what happens next.</p>
+   <ol class="steps">
+    <li><h3>Discuss</h3><p>We learn your goals, users and budget.</p></li>
+    <li><h3>Design</h3><p>You approve screens and a fixed plan.</p></li>
+    <li><h3>Build</h3><p>Weekly demos so you see progress early.</p></li>
+    <li><h3>Launch</h3><p>We deploy, train your team and stay on for support.</p></li>
+   </ol>
+  </div>
+ </section>
+
+ <section id="work">
+  <div class="wrap">
+   <h2>Recent projects</h2>
+   <p class="lead">Replace these sample projects with your own.</p>
+   <div class="work">
+    <article class="project"><span class="tag">E-commerce</span><h3>Online grocery store</h3><p>Orders, delivery slots and payments in one app. Checkout time cut by half.</p></article>
+    <article class="project"><span class="tag">Healthcare</span><h3>Clinic booking system</h3><p>Online appointments and reminders that reduced no-shows for a 12-doctor clinic.</p></article>
+    <article class="project"><span class="tag">Education</span><h3>Learning platform</h3><p>Video classes, quizzes and progress tracking for 5,000 students.</p></article>
+   </div>
+  </div>
+ </section>
+
+ <section id="contact">
+  <div class="wrap contact">
+   <div>
+    <h2>Tell us about your project</h2>
+    <p class="lead">Share a few details and we will reply within one working day.</p>
+    <p>yadav.shashi@gmail.com<br>+91 8946453344</p>
+   </div>
+   <form id="form">
+    <label>Name<input name="name" required autocomplete="name"></label>
+    <label>Email<input name="email" type="email" required autocomplete="email"></label>
+    <label>Project details<textarea name="details" required></textarea></label>
+    <button class="btn" type="submit">Send message</button>
+    <p id="msg" role="status"></p>
+   </form>
+  </div>
+ </section>
+</main>
+
+<footer>
+ <div class="wrap">© <span id="yr"></span> CodeNest. All rights reserved.</div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+// Typing effect in the code window
+var lines = [
+ '<span class="c">// your idea, shipped</span>',
+ '<span class="k">const</span> project = {',
+ '  name: <span class="s">"Your next product"</span>,',
+ '  stack: [<span class="s">"React"</span>, <span class="s">"Node"</span>, <span class="s">"PostgreSQL"</span>],',
+ '  design: <span class="s">"approved"</span>,',
+ '  tests: <span class="s">"passing"</span>',
+ '};',
+ '',
+ '<span class="k">await</span> deploy(project);',
+ '<span class="c">// live in production</span>'
+];
+var el = document.getElementById('code');
+var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var cur = '<span class="cursor"></span>';
+if (reduce) {
+  el.innerHTML = lines.join('\n') + '\n' + cur;
+} else {
+  var i = 0, out = [];
+  (function next() {
+    if (i >= lines.length) { el.innerHTML = out.join('\n') + '\n' + cur; return; }
+    out.push(lines[i++]);
+    el.innerHTML = out.join('\n') + '\n' + cur;
+    setTimeout(next, 450);
+  })();
+}
+
+// Contact form: connect to your backend or a service like Formspree
+document.getElementById('form').addEventListener('submit', function (e) {
+  e.preventDefault();
+  document.getElementById('msg').textContent = 'Thanks! We received your message and will reply soon.';
+  this.reset();
+});
+</script>
+</body>
+</html>
